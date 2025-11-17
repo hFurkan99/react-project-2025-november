@@ -1,0 +1,131 @@
+@use "./variables" as *;
+
+.staff-list {
+  margin: 0 0 $spacing-lg 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  padding: calc($spacing-xs / 2);
+
+  @include mobile {
+    gap: $spacing-xs;
+  }
+
+  .staff {
+    min-height: 40px;
+    padding: 10px $spacing-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    background: linear-gradient(
+      135deg,
+      $color-bg-primary 0%,
+      $color-bg-secondary 100%
+    );
+    border: 2px solid $color-border-light;
+    border-radius: $radius-md;
+    text-transform: capitalize;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: $shadow-sm;
+    position: relative;
+    overflow: hidden;
+    will-change: transform, box-shadow;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: currentColor;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover:not(.active) {
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+
+      &::before {
+        opacity: 0.04;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    }
+
+    svg {
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+
+    span {
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    &.active {
+      background: currentColor !important;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba($color-primary, 0.16),
+        0 4px 10px rgba($color-primary, 0.12);
+      transform: translateY(-1px);
+      animation: pulseGlow 2.4s ease-in-out infinite;
+
+      &::before {
+        opacity: 0;
+      }
+
+      span {
+        color: $color-bg-primary !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      }
+
+      svg path {
+        fill: $color-bg-primary;
+      }
+
+      svg {
+        transform: scale(1.1);
+      }
+    }
+
+    @include mobile {
+      min-height: 36px;
+      padding: $spacing-xs $spacing-sm;
+      font-size: 13px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%,
+    100% {
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3),
+        0 2px 6px rgba(59, 130, 246, 0.2);
+    }
+    50% {
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4),
+        0 2px 8px rgba(59, 130, 246, 0.3);
+    }
+  }
+}

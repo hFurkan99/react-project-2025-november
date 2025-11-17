@@ -27,7 +27,7 @@ function* asyncLogin({
     AuthSession.setPhoneNumber(response.data!.phoneNumber);
     AuthSession.setOrganizationId(response.data!.organizationId);
     AuthSession.setDepartmentId(response.data!.currentDepartmentId);
-    AuthSession.setRoles(`${response.data!.role}`);
+    AuthSession.setRoles(response.data!.role?.name ?? null);
     AuthSession.setLanguage(response.data.language);
 
     onSuccess && onSuccess(response);
@@ -40,8 +40,6 @@ function* asyncLogin({
   }
 }
 
-const authSagas = [
-  debounce(QUERY_DEBOUNCE, types.SIGNIN, asyncLogin),
-];
+const authSagas = [debounce(QUERY_DEBOUNCE, types.SIGNIN, asyncLogin)];
 
 export default authSagas;

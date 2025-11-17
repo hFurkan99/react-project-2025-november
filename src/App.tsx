@@ -1,7 +1,8 @@
 import { Provider } from "react-redux";
 import store from "./store";
 import ProfileCalendar from "./components/ProfileCalendar";
-import './App.css'
+import "./App.css";
+import "./components/styles/profileCalendar.scss";
 
 function App() {
   return (

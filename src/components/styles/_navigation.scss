@@ -1,0 +1,176 @@
+@use "./variables" as *;
+
+.navigation-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: $zone-width-large;
+  z-index: 1000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to right,
+    rgba($color-primary, 0.12),
+    transparent
+  );
+  border: 2px dashed rgba($color-primary, 0.28);
+  transition: all $transition-normal;
+
+  @include xlarge {
+    width: $zone-width-xlarge;
+  }
+
+  @include desktop {
+    width: $zone-width-desktop;
+  }
+
+  @include tablet {
+    width: $zone-width-tablet;
+  }
+
+  @include mobile {
+    display: none !important;
+  }
+
+  &.navigation-zone-left {
+    left: 0;
+    border-radius: $radius-sm 0 0 $radius-sm;
+    border-right: none;
+    background: linear-gradient(
+      to right,
+      rgba($color-primary, 0.15),
+      transparent
+    );
+  }
+
+  &.navigation-zone-right {
+    right: 0;
+    border-radius: 0 $radius-sm $radius-sm 0;
+    border-left: none;
+    background: linear-gradient(
+      to left,
+      rgba($color-primary, 0.15),
+      transparent
+    );
+  }
+
+  &.active {
+    background: linear-gradient(
+      to right,
+      rgba($color-primary, 0.28),
+      rgba($color-primary, 0.08)
+    );
+    border-color: rgba($color-primary, 0.56);
+    border-width: 3px;
+    box-shadow: 0 0 12px rgba($color-primary, 0.22);
+
+    &.navigation-zone-right {
+      background: linear-gradient(
+        to left,
+        rgba($color-primary, 0.35),
+        rgba($color-primary, 0.1)
+      );
+    }
+
+    .navigation-zone-content {
+      transform: scale(1.15);
+    }
+
+    .navigation-arrow {
+      animation: bounce 0.6s ease-in-out infinite;
+      text-shadow: 0 0 6px rgba($color-primary, 0.38);
+    }
+
+    .navigation-text {
+      text-shadow: 0 0 5px rgba($color-primary, 0.34);
+    }
+  }
+
+  .navigation-zone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    transition: transform $transition-normal;
+  }
+
+  .navigation-arrow {
+    font-size: 36px;
+    color: $color-primary;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all $transition-normal;
+  }
+
+  .navigation-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: $color-primary;
+    text-align: center;
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    transition: all $transition-normal;
+  }
+
+  .navigation-progress {
+    position: absolute;
+    bottom: 10px;
+    left: 10%;
+    right: 10%;
+    height: 6px;
+    background: rgba($color-bg-primary, 0.35);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .navigation-progress-bar {
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      $color-primary,
+      $color-primary-light,
+      $color-primary
+    );
+    background-size: 200% 100%;
+    animation: progressShine 1s linear infinite;
+    border-radius: 3px;
+    transition: width 0.016s linear;
+    box-shadow: 0 0 8px rgba($color-primary, 0.28);
+  }
+}
+
+.navigation-zone-right .navigation-arrow {
+  animation: bounceRight 0.5s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+}
+
+@keyframes bounceRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes progressShine {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}

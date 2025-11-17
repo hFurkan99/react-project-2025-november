@@ -1,0 +1,55 @@
+@use "./variables" as *;
+@use "./calendar";
+@use "./date-picker";
+@use "./event-modal";
+@use "./navigation";
+@use "./profile-card";
+@use "./staff-header";
+@use "./staff-list";
+
+// Global improvements
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  @media (max-width: $breakpoint-mobile) {
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+}
+
+body {
+  @media (max-width: $breakpoint-mobile) {
+    overflow-y: auto !important;
+    height: auto !important;
+    position: relative !important;
+  }
+}
+
+.profile-calendar-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  padding: $spacing-lg;
+  background: linear-gradient(
+    135deg,
+    $color-bg-page 0%,
+    $color-bg-secondary 100%
+  );
+  min-height: 100vh;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: $spacing-md;
+    gap: $spacing-md;
+    min-height: auto;
+    height: auto;
+  }
+}
+
+// .highlightedPair {
+//   content: "";
+//   border-bottom: 5px solid rgba(194, 6, 138, 0.5) !important;
+// }
